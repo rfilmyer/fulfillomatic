@@ -90,4 +90,7 @@ function loadQuoteAndImage(){
     };
 }
 
-loadQuoteAndImage();
+document.addEventListener('DOMContentLoaded', loadQuoteAndImage, false);
+
+const mindfulnessButton = document.getElementById("mindful-button")
+mindfulnessButton.addEventListener('click', loadQuoteAndImage, false);
