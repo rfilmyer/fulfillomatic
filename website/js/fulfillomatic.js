@@ -56,31 +56,38 @@ function drawText(text){
 
 }
 
+function pickRandomElement(array){
+    return array[Math.floor(Math.random() * array.length)]
+}
+
 // And now, the business.
-
-const quoteFetch = fetch("quote")
-    .then(res => res.text());
-
 const quoteImage = new Image(),
     quoteCanvas = document.getElementById('quote-image'),
     quoteContext = quoteCanvas.getContext('2d')
 ;
 
-// Select a random image
-fetch("img/quote-background/manifest.json")
-    .then(res => res.json())
-    .then(jsonArray => jsonArray[Math.floor(Math.random() * jsonArray.length)])
-    .then(imageFilename => "img/quote-background/" + imageFilename)
-    .then(imageURL => {quoteImage.src = imageURL});
-// quoteImage.src = 'https://www.google.nl/images/srpr/logo3w.png';
+function loadQuoteAndImage(){
+    const quoteFetch = fetch("quotes.json")
+        .then(res => res.json())
+        .then(jsonArray => pickRandomElement(jsonArray));
+
+    // Select a random image
+    fetch("img/quote-background/manifest.json")
+        .then(res => res.json())
+        .then(jsonArray => pickRandomElement(jsonArray))
+        .then(imageFilename => "img/quote-background/" + imageFilename)
+        .then(imageURL => {quoteImage.src = imageURL});
 
 
-// S/O https://stackoverflow.com/a/26015533/2856889
-quoteImage.onload = function(){
-    quoteContext.drawImage(quoteImage,
-        0, 0,   // Start at 70/20 pixels from the left and the top of the image (crop),
-        650, 650,   // "Get" a `50 * 50` (w * h) area from the source image (crop),
-        0, 0,     // Place the result at 0, 0 in the canvas,
-        650, 650); // With as width / height: 100 * 100 (scale)
-    quoteFetch.then(drawText)
-};
+    // S/O https://stackoverflow.com/a/26015533/2856889
+    quoteImage.onload = function(){
+        quoteContext.drawImage(quoteImage,
+            0, 0,   // Start at 70/20 pixels from the left and the top of the image (crop),
+            650, 650,   // "Get" a `50 * 50` (w * h) area from the source image (crop),
+            0, 0,     // Place the result at 0, 0 in the canvas,
+            650, 650); // With as width / height: 100 * 100 (scale)
+        quoteFetch.then(drawText)
+    };
+}
+
+loadQuoteAndImage();
