@@ -34,25 +34,32 @@ function getTopHeights(numTextLines, textHeight, imageHeight) {
 
 function drawText(text){
 
-    const textHeightPixels = 48;
+    const textHeightPixels = 58;
     const imageHeight = 650;
+    const imageWidth = 650;
+    const marginSize = 25;
 
     const ctx = quoteContext;
-    ctx.font = textHeightPixels + 'px cursive';
+    ctx.font = textHeightPixels + 'px "Courgette", cursive';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     ctx.fillStyle = 'white';
 
-    const textLines = getLines(ctx, text, 650 - 20);
+    const textLines = getLines(ctx, text, imageHeight - marginSize * 2);
 
     const topHeights = getTopHeights(textLines.length, textHeightPixels, imageHeight);
 
     for (let i = textLines.length - 1; i >= 0; i--) {
         const currentLine = textLines[i];
         const currentHeight = topHeights[i];
-        ctx.fillText(currentLine, 325, currentHeight);
+        ctx.fillText(currentLine, imageWidth / 2, currentHeight);
     }
-
+    
+    const watermarkText = "Instagram | @fulfillomatic";
+    ctx.font = '16px "Marck Script", cursive';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(watermarkText, imageWidth - marginSize, imageHeight - marginSize);
 
 }
 
@@ -94,3 +101,9 @@ document.addEventListener('DOMContentLoaded', loadQuoteAndImage, false);
 
 const mindfulnessButton = document.getElementById("mindful-button")
 mindfulnessButton.addEventListener('click', loadQuoteAndImage, false);
+
+// Play the audio when the button is clicked
+mindfulnessButton.addEventListener('click', () => {
+    const musicElement = document.getElementById('music');
+    musicElement.play();
+    }, false)

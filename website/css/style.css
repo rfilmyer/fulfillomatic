@@ -4,3 +4,19 @@ body {
     background-position: right top;
     background-attachment: fixed;
 }
+
+#font-1 {
+    font-family: 'Marck Script', cursive;
+}
+
+#font-2 {
+    font-family: 'Courgette', cursive;
+}
+
+h1 {
+}
+
+.lead {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 100;
+}
