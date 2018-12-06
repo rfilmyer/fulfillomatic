@@ -81,7 +81,7 @@ function loadQuoteAndImage(e){
     // Pull the list of quotes and get a random one.
     const quoteFetch = fetch("quotes.json")
         .then(res => res.json())
-        //.then(jsonObject => jsonObject[idInQuoteDocument])
+        .then(jsonObject => jsonObject[idInQuoteDocument])
         .then(jsonArray => pickRandomElement(jsonArray));
 
     // Select a random image
