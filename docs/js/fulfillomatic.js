@@ -73,9 +73,15 @@ const quoteImage = new Image(),
     quoteContext = quoteCanvas.getContext('2d')
 ;
 
-function loadQuoteAndImage(){
+function loadQuoteAndImage(e){
+    const buttonId = e.target.id || 'start'; // Undefined -> "start" for the first quote
+    const idInQuoteDocument = String(buttonId).split("-")[0];
+
+
+    // Pull the list of quotes and get a random one.
     const quoteFetch = fetch("quotes.json")
         .then(res => res.json())
+        //.then(jsonObject => jsonObject[idInQuoteDocument])
         .then(jsonArray => pickRandomElement(jsonArray));
 
     // Select a random image
@@ -99,11 +105,8 @@ function loadQuoteAndImage(){
 
 document.addEventListener('DOMContentLoaded', loadQuoteAndImage, false);
 
-const mindfulnessButton = document.getElementById("mindful-button")
-mindfulnessButton.addEventListener('click', loadQuoteAndImage, false);
+const quoteButtons = $("#quote-buttons button");
+quoteButtons.each((_, e) => e.addEventListener('click', loadQuoteAndImage, false))
 
 // Play the audio when the button is clicked
-mindfulnessButton.addEventListener('click', () => {
-    const musicElement = document.getElementById('music');
-    musicElement.play();
-    }, false)
+quoteButtons.each((_, e) => e.addEventListener('click', () => $("#music")[0].play()));
