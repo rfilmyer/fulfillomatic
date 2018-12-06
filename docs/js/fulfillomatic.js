@@ -103,6 +103,13 @@ function loadQuoteAndImage(e){
             650, 650); // With as width / height: 100 * 100 (scale)
         randomQuotePromise.then(drawText)
     };
+
+    // Speak, Memory.
+    randomQuotePromise
+        .then(function(text) {
+            var msg = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(msg);
+        })
 }
 
 document.addEventListener('DOMContentLoaded', loadQuoteAndImage, false);
