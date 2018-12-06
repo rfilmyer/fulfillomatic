@@ -4,7 +4,12 @@ body {
 }
 
 footer {
-    background-color: #9E609B;
+    background-color: #311C30;
+    color: white;
+}
+
+.btn-accent-color {
+    background-color: #311C30;
 }
 
 #font-1 {
@@ -44,4 +49,8 @@ footer ul {
     justify-content: space-between;
     margin: 0;
     padding: 5px 10px;
+}
+
+canvas {
+    border-radius: 25px;
 }
