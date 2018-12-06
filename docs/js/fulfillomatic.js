@@ -73,14 +73,16 @@ const quoteImage = new Image(),
     quoteContext = quoteCanvas.getContext('2d')
 ;
 
+const quoteFetch = fetch("quotes.json")
+    .then(res => res.json())
+
 function loadQuoteAndImage(e){
     const buttonId = e.target.id || 'start'; // Undefined -> "start" for the first quote
     const idInQuoteDocument = String(buttonId).split("-")[0];
 
 
     // Pull the list of quotes and get a random one.
-    const quoteFetch = fetch("quotes.json")
-        .then(res => res.json())
+    const randomQuotePromise = quoteFetch
         .then(jsonObject => jsonObject[idInQuoteDocument])
         .then(jsonArray => pickRandomElement(jsonArray));
 
@@ -99,7 +101,7 @@ function loadQuoteAndImage(e){
             650, 650,   // "Get" a `50 * 50` (w * h) area from the source image (crop),
             0, 0,     // Place the result at 0, 0 in the canvas,
             650, 650); // With as width / height: 100 * 100 (scale)
-        quoteFetch.then(drawText)
+        randomQuotePromise.then(drawText)
     };
 }
 
