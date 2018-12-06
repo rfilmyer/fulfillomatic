@@ -143,6 +143,21 @@ def third_eye():
 
 ![](img/trigram2.png)
 
+# LSTM: Enlightenment
+
+## Output
+
+## 
+
+![](img/lstm3.png)
+
+## 
+
+![](img/lstm2.png)
+
+## 
+
+![](img/lstm1.png)
 
 # Future work
 

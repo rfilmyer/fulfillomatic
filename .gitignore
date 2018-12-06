@@ -105,3 +105,4 @@ venv.bak/
 
 # jetbrains
 .idea/
+.Rproj.user
